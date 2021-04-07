@@ -31,7 +31,7 @@ app.use(session({
 }));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); //EI näin projektissa
 
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -67,6 +67,11 @@ app.get('/readCookie/:clr', (req, res) => {
 app.get('/deleteCookie/:clr', (req, res) => {
   res.clearCookie('color');
   res.send('cookie read');
+});
+
+app.get('/logout', (req, res)=>{
+  req.logout();
+  res.redirect('/');
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
